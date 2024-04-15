@@ -138,6 +138,7 @@ R_PAPERSIZE=letter \
 
 make
 make install
+make install-tests
 make clean
 
 ## Add a library directory (for user-installed packages)
