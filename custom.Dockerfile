@@ -34,8 +34,9 @@ COPY custom_scripts /custom_scripts
 
 # packages below are needed to run base R tests successfully
 ARG DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && apt-get install -y tzdata tk-dev
-RUN tlmgr install colortbl booktabs fancyhdr caption grfext
+RUN apt-get update && apt-get install -y tzdata tk-dev && \
+	tlmgr install colortbl booktabs fancyhdr caption grfext && \ 
+	rm -rf /var/lib/apt/lists/*
 
 # Switch to libblas instead of OpenBLAS (OpenBLAS is faster for matrix calculations but might give test errors).
 RUN /custom_scripts/switch_to_libblas.sh

@@ -11,14 +11,13 @@ rmarkdown::render("/rocker_scripts/rmarkdown/simplereport.Rmd", output_format = 
 
 
 # installing basic version, without rocker 'verse', but with latex support:
-docker build -f custom.Dockerfile --progress=plain -t gcps_r_4.3.1_minimal .
-docker run --name gcpsbase -it gcps_r_4.3.1_minimal 
+docker build -f custom.Dockerfile --progress=plain -t r_base_4.3.1 .
+docker run --name r_base -it r_base_4.3.1
 
-export LC_COLLATE=C LANG=en LC_TIME=C ## gives warnings?? not sure if this works.
 Sys.setenv(LC_COLLATE = "C", LC_TIME = "C", LANGUAGE = "en")
-local({oldwd <- getwd(); on.exit(setwd(oldwd)); setwd("/rocker_scripts/tests/R-IQ-OQ/"); Sweave("R-IQ-OQ.Rnw")})
+local({oldwd <- getwd(); on.exit(setwd(oldwd)); setwd("/custom_scripts/R-IQ-OQ/"); Sweave("R-IQ-OQ.Rnw")})
 
-cd /rocker_scripts/tests/R-IQ-OQ/
+cd /custom_scripts/R-IQ-OQ/
 pdflatex R-IQ-OQ.tex
 
-tlmgr install colortbl booktabs fancyhdr caption grfext
+
