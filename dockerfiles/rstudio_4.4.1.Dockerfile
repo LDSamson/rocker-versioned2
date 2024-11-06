@@ -7,7 +7,7 @@ ENV TZ="Etc/UTC"
 COPY scripts/install_R_source.sh /rocker_scripts/install_R_source.sh
 RUN /rocker_scripts/install_R_source.sh
 
-ENV CRAN="https://p3m.dev/cran/__linux__/jammy/2024-10-30"
+ENV CRAN="https://p3m.dev/cran/__linux__/jammy/2024-09-17"
 ENV LANG=en_US.UTF-8
 
 COPY scripts/bin/ /rocker_scripts/bin/
@@ -34,5 +34,18 @@ RUN /rocker_scripts/install_pandoc.sh
 
 COPY scripts/install_quarto.sh /rocker_scripts/install_quarto.sh
 RUN /rocker_scripts/install_quarto.sh
+
+RUN install2.r --error --skipinstalled \
+    dplyr \
+	tidyr \
+	purrr \
+	readr \
+	readxl \
+    rmarkdown \
+	ggplot2 \
+	patchwork \
+	survival \
+	lme4 \
+	car	
 
 COPY scripts /rocker_scripts
