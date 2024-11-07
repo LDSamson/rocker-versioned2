@@ -35,7 +35,9 @@ RUN /rocker_scripts/install_pandoc.sh
 COPY scripts/install_quarto.sh /rocker_scripts/install_quarto.sh
 RUN /rocker_scripts/install_quarto.sh
 
-RUN install2.r --error --skipinstalled \
+COPY scripts /rocker_scripts
+
+RUN rocker_scripts/bin/install2.r --error --skipinstalled \
     dplyr \
 	tidyr \
 	purrr \
@@ -47,5 +49,3 @@ RUN install2.r --error --skipinstalled \
 	survival \
 	lme4 \
 	car	
-
-COPY scripts /rocker_scripts
